@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Editor de currículo profissional com pré-visualização em tempo real e exportação para PDF. Gratuito e sem cadastro." />
+  <title>CV Generator</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=7">
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-dot">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="brand-text">
+          <p class="brand-eye" data-i18n="brand_eye">CV Generator</p>
+          <h1 class="brand-title" data-i18n="brand_title">Editor de Currículo Profissional</h1>
+          <p class="brand-sub" data-i18n="brand_sub">Edite os campos à esquerda e veja a pré-visualização em tempo real. Use os botões abaixo para gerar PDF ou exportar seus dados.</p>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="lang-wrapper">
+          <svg class="lang-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <select id="lang-select">
+            <option value="pt">PT</option>
+            <option value="en">EN</option>
+            <option value="es">ES</option>
+          </select>
+        </div>
+        <button class="btn btn--ghost" id="clear-btn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          <span data-i18n="btn_clear">Limpar Tudo</span>
+        </button>
+        <button class="btn btn--ghost" id="reset-btn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          <span data-i18n="btn_reset">Restaurar</span>
+        </button>
+        <button class="btn btn--ghost" id="import-btn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span data-i18n="btn_import">Importar JSON</span>
+        </button>
+        <input type="file" id="import-file" accept=".json" style="display:none" />
+        <button class="btn btn--ghost" id="export-btn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="btn_export">Exportar JSON</span>
+        </button>
+        <button class="btn btn--primary" id="download-pdf-btn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+          <span data-i18n="btn_pdf">Download PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="layout">
+      <section class="panel">
+        <div class="panel-head">
+          <div class="panel-head-left">
+            <svg class="panel-head-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <div>
+              <h2 data-i18n="panel_edit_title">Campos Editáveis</h2>
+              <p data-i18n="panel_edit_sub">Edite seu currículo em tempo real</p>
+            </div>
+          </div>
+          <span class="panel-badge">
+            <span class="panel-badge-dot"></span>
+            <span data-i18n="badge_live">Ao Vivo</span>
+          </span>
+        </div>
+
+        <div class="section-toggles">
+          <p class="section-toggles-title">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span data-i18n="toggles_title">Seções Visíveis no PDF</span>
+          </p>
+          <div class="section-toggles-grid">
+            <label class="toggle-label">
+              <input type="checkbox" id="toggle-contato" class="section-toggle" checked /> <span data-i18n="toggle_contact">Contato</span>
+            </label>
+            <label class="toggle-label">
+              <input type="checkbox" id="toggle-exp" class="section-toggle" checked /> <span data-i18n="toggle_experience">Experiência</span>
+            </label>
+            <label class="toggle-label">
+              <input type="checkbox" id="toggle-edu" class="section-toggle" checked /> <span data-i18n="toggle_education">Formação</span>
+            </label>
+            <label class="toggle-label">
+              <input type="checkbox" id="toggle-skills" class="section-toggle" checked /> <span data-i18n="toggle_skills">Habilidades Técnicas</span>
+            </label>
+            <label class="toggle-label">
+              <input type="checkbox" id="toggle-langs" class="section-toggle" checked /> <span data-i18n="toggle_languages">Idiomas</span>
+            </label>
+            <label class="toggle-label">
+              <input type="checkbox" id="toggle-certs" class="section-toggle" checked /> <span data-i18n="toggle_certs">Certificações</span>
+            </label>
+            <label class="toggle-label">
+              <input type="checkbox" id="toggle-highlights" class="section-toggle" checked /> <span data-i18n="toggle_highlights">Destaques</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="editor">
+          <div class="fsec">
+            <p class="fsec-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span data-i18n="sec_personal">Informações Pessoais</span>
+            </p>
+            <div class="fg">
+              <div class="f f--full">
+                <label for="f-name" data-i18n="lbl_name">Nome Completo</label>
+                <input id="f-name" type="text" value="Gabriel Matozo" />
+              </div>
+              <div class="f f--full">
+                <label for="f-role" data-i18n="lbl_role">Profissão / Título</label>
+                <input id="f-role" type="text" value="Analista de Cibersegurança · Risco Operacional e Prevenção a Fraude" />
+              </div>
+              <div class="f f--full">
+                <label for="f-summary" data-i18n="lbl_summary">Resumo Profissional (1-2 linhas)</label>
+                <textarea id="f-summary">Profissional de Cibersegurança com 3 anos de experiência na prevenção de fraudes financeiras e análise de riscos operacionais. Especialista em Inteligência de ameaças, resposta a incidentes e análise de dados (SQL). Possuo forte diferencial em automação de segurança e engenharia (Python/APIs), desenvolvendo soluções para escalar investigações, identificar padrões ilícitos com agilidade e garantir o compliance com normativas do BACEN e LGPD.</textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="fsec">
+            <p class="fsec-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span data-i18n="sec_contact">Contato</span>
+            </p>
+            <div class="fg">
+              <div class="f f--full">
+                <label for="f-email" data-i18n="lbl_email">E-mail</label>
+                <input id="f-email" type="email" value="contato.gmatozo@gmail.com" />
+              </div>
+              <div class="f">
+                <label for="f-phone" data-i18n="lbl_phone">Telefone (opcional)</label>
+                <input id="f-phone" type="tel" value="" />
+              </div>
+              <div class="f">
+                <label for="f-location" data-i18n="lbl_location">Localização</label>
+                <input id="f-location" type="text" value="Indaiatuba, São Paulo, Brasil" />
+              </div>
+              <div class="f f--full">
+                <label for="f-linkedin">LinkedIn (usuário)</label>
+                <input id="f-linkedin" type="text" value="gabrielmatozo" placeholder="deixe vazio para ocultar" />
+              </div>
+              <div class="f f--full">
+                <label for="f-github">GitHub (usuário)</label>
+                <input id="f-github" type="text" value="gabrielmatozo" placeholder="deixe vazio para ocultar" />
+              </div>
+              <div class="f f--full">
+                <label for="f-link1-label">Link Extra 1 - Label</label>
+                <input id="f-link1-label" type="text" value="" />
+              </div>
+              <div class="f f--full">
+                <label for="f-link1">Link Extra 1 - URL</label>
+                <input id="f-link1" type="text" value="" />
+              </div>
+              <div class="f f--full">
+                <label for="f-link2-label">Link Extra 2 - Label</label>
+                <input id="f-link2-label" type="text" value="" />
+              </div>
+              <div class="f f--full">
+                <label for="f-link2">Link Extra 2 - URL</label>
+                <input id="f-link2" type="text" value="" />
+              </div>
+            </div>
+          </div>
+
+          <div class="fsec">
+            <p class="fsec-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <span data-i18n="sec_stack">Stack de Tecnologias</span>
+            </p>
+            <div class="fg">
+              <div class="f f--full">
+                <label for="f-stack" data-i18n="lbl_stack">Tecnologias (separadas por vírgula)</label>
+                <input id="f-stack" type="text" value="Python, Flask, FastAPI, SQL, Docker, Linux, Git, REST APIs, Pytest" />
+                <p class="help" data-i18n="help_stack">Separe com vírgulas. As primeiras aparecem como "destaque"</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="fsec">
+            <p class="fsec-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <span data-i18n="sec_experience">Experiência Profissional</span>
+            </p>
+            <div class="fg">
+              <div class="f f--full">
+                <label for="f-company1-name" data-i18n="lbl_company1_name">Empresa 1 - Nome</label>
+                <input id="f-company1-name" type="text" value="Topaz" />
+              </div>
+              <div class="f f--full">
+                <label for="f-company1-meta" data-i18n="lbl_company1_meta">Empresa 1 - Local e Tipo</label>
+                <input id="f-company1-meta" type="text" value="Indaiatuba, SP" />
+              </div>
+              <div class="f f--full">
+                <label for="f-c1-title" data-i18n="lbl_c1_title">Cargo 1 (mais recente)</label>
+                <input id="f-c1-title" type="text" value="Desenvolvedor Backend" />
+              </div>
+              <div class="f f--full">
+                <label for="f-c1-date" data-i18n="lbl_c1_date">Datas do Cargo 1</label>
+                <input id="f-c1-date" type="text" value="Novembro de 2025 – Presente" />
+              </div>
+              <div class="f f--full">
+                <label for="f-c1-bullets" data-i18n="lbl_c1_bullets">Realizações do Cargo 1 (uma por linha)</label>
+                <textarea id="f-c1-bullets">Desenvolvimento de APIs REST (FastAPI/Flask) aplicando Clean Architecture para suportar as operações críticas de monitoramento, investigação e detecção de fraudes
+Construção de ferramentas internas que dão suporte direto à operação e investigação do time de Cyber Security
+Garantia da qualidade e resiliência das automações de segurança através da implementação de testes automatizados (Pytest e Gherkin)
+Uso de Docker e Linux para padronização de ambientes seguros e suporte à infraestrutura de defesa</textarea>
+              </div>
+              <div class="f f--full">
+                <label for="f-c2-title" data-i18n="lbl_c2_title">Cargo 2 (anterior)</label>
+                <input id="f-c2-title" type="text" value="Analista de Segurança da Informação Jr" />
+              </div>
+              <div class="f f--full">
+                <label for="f-c2-company" data-i18n="lbl_c2_company">Empresa do Cargo 2</label>
+                <input id="f-c2-company" type="text" value="Topaz" />
+              </div>
+              <div class="f f--full">
+                <label for="f-c2-meta" data-i18n="lbl_c2_meta">Metadados do Cargo 2 (local, tipo)</label>
+                <input id="f-c2-meta" type="text" value="Indaiatuba, SP" />
+              </div>
+              <div class="f f--full">
+                <label for="f-c2-date" data-i18n="lbl_c2_date">Datas do Cargo 2</label>
+                <input id="f-c2-date" type="text" value="Novembro de 2022 – Novembro de 2025" />
+              </div>
+              <div class="f f--full">
+                <label for="f-c2-bullets" data-i18n="lbl_c2_bullets">Realizações do Cargo 2 (uma por linha)</label>
+                <textarea id="f-c2-bullets">Atuação estratégica em cibersegurança e prevenção a fraudes financeiras, com foco em inteligência de ameaças e mitigação de riscos operacionais
+Inteligência de Ameaças e Investigação: Análise do modus operandi de vetores de ataque complexos (como phishing, engenharia social e malware) utilizando técnicas de OSINT e análise de logs para identificar, documentar e desarticular cenários de fraude financeira
+Análise de Dados e Mitigação de Riscos: Extração e cruzamento massivo de dados utilizando queries (SQL/NoSQL), atuando na identificação de padrões anômalos e de transações ilícitas, protegendo a jornada do usuário
+Automação e Engenharia de Resposta: Desenvolvimento de scripts e automações em Python para otimizar fluxos de investigação, acelerar a resposta a incidentes de segurança (CSIRT) e gerar relatórios gerenciais de exposição a riscos
+Gestão de Vulnerabilidades: Atuação ativa na análise de vulnerabilidades em sistemas e aplicações, propondo arquiteturas e soluções técnicas de mitigação em conjunto com os times de engenharia de software e infraestrutura</textarea>
+              </div>
+              <div class="f f--full">
+                <label for="f-c3-title" data-i18n="lbl_c3_title">Empresa/cargo anterior (opcional)</label>
+                <input id="f-c3-title" type="text" value="Analista de suporte técnico" />
+              </div>
+              <div class="f f--full">
+                <label for="f-c3-company" data-i18n="lbl_c3_company">Nome da empresa | local</label>
+                <input id="f-c3-company" type="text" value="ITease-Soluções em TI · Indaiatuba, SP" />
+              </div>
+              <div class="f f--full">
+                <label for="f-c3-date" data-i18n="lbl_c3_date">Datas do cargo anterior</label>
+                <input id="f-c3-date" type="text" value="Setembro de 2021 – Novembro de 2022" />
+              </div>
+              <div class="f f--full">
+                <label for="f-c3-bullets" data-i18n="lbl_c3_bullets">Realizações do cargo anterior</label>
+                <textarea id="f-c3-bullets">Administração de infraestrutura de TI, incluindo servidores, redes e controle de acessos
+Desenvolvimento de automações para otimização do ambiente
+Diagnóstico e resolução de incidentes de média e alta complexidade, garantindo SLAs</textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="fsec">
+            <p class="fsec-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg>
+              <span data-i18n="sec_education">Formação</span>
+            </p>
+            <div class="fg">
+              <div class="f f--full">
+                <label for="f-edu-title" data-i18n="lbl_edu_title">Curso/Certificação</label>
+                <input id="f-edu-title" type="text" value="Bacharelado em Ciência da Computação" />
+              </div>
+              <div class="f f--full">
+                <label for="f-edu-meta" data-i18n="lbl_edu_meta">Instituição</label>
+                <input id="f-edu-meta" type="text" value="Centro Universitário Nossa Senhora do Patrocínio - CEUNSP" />
+              </div>
+              <div class="f f--full">
+                <label for="f-edu-desc" data-i18n="lbl_edu_desc">Descrição</label>
+                <input id="f-edu-desc" type="text" value="2020 - 2024" />
+              </div>
+            </div>
+          </div>
+
+          <div class="fsec">
+            <p class="fsec-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span data-i18n="sec_skills">Habilidades Técnicas</span>
+            </p>
+            <div class="fg">
+              <div class="f">
+                <label for="f-sk1-label">Categoria 1 - Label</label>
+                <input id="f-sk1-label" type="text" value="Backend" />
+              </div>
+              <div class="f f--full">
+                <label for="f-sk1">Categoria 1 - Habilidades</label>
+                <input id="f-sk1" type="text" value="Python, Flask, FastAPI, REST APIs, SQL, Pytest, TDD, BDD, Gherkin" />
+              </div>
+              <div class="f">
+                <label for="f-sk2-label">Categoria 2 - Label</label>
+                <input id="f-sk2-label" type="text" value="Arquitetura" />
+              </div>
+              <div class="f f--full">
+                <label for="f-sk2">Categoria 2 - Habilidades</label>
+                <input id="f-sk2" type="text" value="Clean Architecture, SOLID, Testes Automatizados" />
+              </div>
+              <div class="f">
+                <label for="f-sk3-label">Categoria 3 - Label</label>
+                <input id="f-sk3-label" type="text" value="Segurança & Antifraude" />
+              </div>
+              <div class="f f--full">
+                <label for="f-sk3">Categoria 3 - Habilidades</label>
+                <input id="f-sk3" type="text" value="Investigação de Incidentes, Detecção de Anomalias, Identificação de Padrões de Fraude, Threat Intelligence, Análise de Risco, Resposta a Incidentes" />
+              </div>
+              <div class="f">
+                <label for="f-sk4-label">Categoria 4 - Label</label>
+                <input id="f-sk4-label" type="text" value="Ferramentas" />
+              </div>
+              <div class="f f--full">
+                <label for="f-sk4">Categoria 4 - Habilidades</label>
+                <input id="f-sk4" type="text" value="Docker, Linux, Git, Jira, Confluence, Postman" />
+              </div>
+            </div>
+          </div>
+
+          <div class="fsec">
+            <p class="fsec-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span data-i18n="sec_languages">Idiomas</span>
+            </p>
+            <div class="fg">
+              <div class="f f--full">
+                <label for="f-langs" data-i18n="lbl_langs">Idiomas (formato: "Nome · Nível", um por linha)</label>
+                <textarea id="f-langs">Português · Nativo
+Inglês · Intermediário
+Espanhol · Básico</textarea>
+                <p class="help" data-i18n="help_langs">Formato: "Português · Nativo" — cada um em uma linha</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="fsec">
+            <p class="fsec-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              <span data-i18n="sec_certs">Certificações e Cursos</span>
+            </p>
+            <div class="fg">
+              <div class="f f--full">
+                <label for="f-certs" data-i18n="lbl_certs">Certificações (uma por linha)</label>
+                <textarea id="f-certs">Curso de Python 3 – Mundo 1
+Certificação Técnica - N-able MSP Manager
+Certificação Técnica - N-able N-sight RMM
+Gravityzone Security Cloud Administrator (Bitdefender)
+Fundamentos de Lógica de Programação</textarea>
+                <p class="help" data-i18n="help_certs">Use uma linha para cada certificado ou curso relevante</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="fsec">
+            <p class="fsec-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span data-i18n="sec_highlights">Destaques</span>
+            </p>
+            <div class="fg">
+              <div class="f f--full">
+                <label for="f-highlights" data-i18n="lbl_highlights">Destaques Principais (um por linha)</label>
+                <textarea id="f-highlights">Análise de Fraudes e Logs: Investigação de incidentes, cruzamento de dados com SQL e identificação de padrões suspeitos na operação
+Automação de Processos: Criação de scripts em Python para automatizar tarefas repetitivas, dando velocidade e agilidade à resposta a incidentes
+Desenvolvimento para Segurança: Construção de APIs REST e serviços (Flask/FastAPI) que dão suporte direto às ferramentas do time de prevenção a fraudes</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div class="panel-head-left">
+            <svg class="panel-head-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <div>
+              <h2 data-i18n="panel_preview_title">Pré-visualização do CV</h2>
+              <p data-i18n="panel_preview_sub">Pré-visualização em tempo real do PDF</p>
+            </div>
+          </div>
+          <span class="panel-badge">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span data-i18n="badge_a4">A4 Pronto</span>
+          </span>
+        </div>
+        <div class="preview">
+          <article class="paper" id="paper">
+            <header class="cv-head">
+              <div class="cv-head-top">
+                <div>
+                  <h1 class="cv-name" id="p-name-display"><em></em></h1>
+                  <p class="cv-role" id="p-role">Backend Developer · <strong>Information Security</strong> · Fraud Prevention</p>
+                  <div class="cv-stack" id="p-stack">
+                    <span class="cv-stack-chip hot">Python</span>
+                    <span class="cv-stack-chip hot">Flask</span>
+                    <span class="cv-stack-chip hot">FastAPI</span>
+                    <span class="cv-stack-chip">Elasticsearch</span>
+                    <span class="cv-stack-chip">SQL</span>
+                    <span class="cv-stack-chip">Docker</span>
+                  </div>
+                </div>
+              <div id="p-contato" class="cv-contacts">
+                  <div class="cv-cr" id="email-cr">
+                    <span class="cv-cr-label" data-i18n="cv_email">E-mail</span>
+                    <a id="p-email-a" href="mailto:"><span id="p-email"></span></a>
+                  </div>
+                  <div class="cv-cr" id="phone-cr">
+                    <span class="cv-cr-label" data-i18n="cv_phone">Tel</span>
+                    <span id="p-phone"></span>
+                  </div>
+                  <div class="cv-cr" id="linkedin-cr">
+                    <span class="cv-cr-label">LinkedIn</span>
+                    <a id="p-linkedin-a" href="https://linkedin.com/in/"><span id="p-linkedin"></span></a>
+                  </div>
+                  <div class="cv-cr" id="github-cr">
+                    <span class="cv-cr-label">GitHub</span>
+                    <a id="p-github-a" href="https://github.com/"><span id="p-github"></span></a>
+                  </div>
+                  <div class="cv-cr" id="link1-cr">
+                    <span class="cv-cr-label" id="p-link1-label"></span>
+                    <a id="p-link1-a" href=""><span id="p-link1"></span></a>
+                  </div>
+                  <div class="cv-cr" id="link2-cr">
+                    <span class="cv-cr-label" id="p-link2-label"></span>
+                    <a id="p-link2-a" href=""><span id="p-link2"></span></a>
+                  </div>
+                  <div class="cv-cr" id="location-cr">
+                    <span class="cv-cr-label" data-i18n="cv_location">Localização</span>
+                    <span id="p-location"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="cv-summary-strip" id="p-summary"></div>
+            </header>
+
+            <div class="cv-body">
+              <aside class="cv-side">
+                <section class="cv-sec" id="p-skills">
+                  <h2 class="cv-sec-title" data-i18n="cv_skills">Habilidades Técnicas</h2>
+                  <div class="cv-skill-group" id="sk1-group">
+                    <p class="cv-skill-label" id="p-sk1-label">Backend</p>
+                    <div class="cv-tags" id="p-sk1"></div>
+                  </div>
+                  <div class="spacer-sm" id="sk1-spacer"></div>
+                  <div class="cv-skill-group" id="sk2-group">
+                    <p class="cv-skill-label" id="p-sk2-label">Arquitetura</p>
+                    <div class="cv-tags" id="p-sk2"></div>
+                  </div>
+                  <div class="spacer-sm" id="sk2-spacer"></div>
+                  <div class="cv-skill-group" id="sk3-group">
+                    <p class="cv-skill-label" id="p-sk3-label">Segurança & Antifraude</p>
+                    <div class="cv-tags" id="p-sk3"></div>
+                  </div>
+                  <div class="spacer-sm" id="sk3-spacer"></div>
+                  <div class="cv-skill-group" id="sk4-group">
+                    <p class="cv-skill-label" id="p-sk4-label">Ferramentas</p>
+                    <div class="cv-tags" id="p-sk4"></div>
+                  </div>
+                </section>
+
+                <section class="cv-sec" id="p-langs-section">
+                  <h2 class="cv-sec-title" data-i18n="cv_languages">Idiomas</h2>
+                  <ul class="cv-lang-list" id="p-langs"></ul>
+                </section>
+
+                <section class="cv-sec" id="p-highlights">
+                  <h2 class="cv-sec-title" data-i18n="cv_highlights">Destaques</h2>
+                  <ul class="cv-highlights-list" id="p-highlights-list"></ul>
+                </section>
+              </aside>
+
+              <main class="cv-main">
+                <section class="cv-sec" id="p-exp">
+                  <h2 class="cv-sec-title" data-i18n="cv_experience">Experiência</h2>
+
+                  <div class="cv-exp-standalone" id="exp1-block">
+                    <div class="cv-exp-head">
+                      <span class="cv-exp-title" id="p-c1-title"></span>
+                      <span class="cv-exp-date" id="p-c1-date"></span>
+                    </div>
+                    <p class="cv-exp-company"><strong id="p-company1-name"></strong> · <span id="p-company1-meta"></span></p>
+                    <ul class="cv-exp-bullets" id="p-c1-bullets"></ul>
+                  </div>
+
+                  <div class="cv-exp-standalone" id="exp2-block">
+                    <div class="cv-exp-head">
+                      <span class="cv-exp-title" id="p-c2-title"></span>
+                      <span class="cv-exp-date" id="p-c2-date"></span>
+                    </div>
+                    <p class="cv-exp-company"><strong id="p-c2-company"></strong> · <span id="p-c2-meta"></span></p>
+                    <ul class="cv-exp-bullets" id="p-c2-bullets"></ul>
+                  </div>
+
+                  <div class="cv-exp-standalone" id="exp3-block">
+                    <div class="cv-exp-head">
+                      <span class="cv-exp-title" id="p-c3-title"></span>
+                      <span class="cv-exp-date" id="p-c3-date"></span>
+                    </div>
+                    <p class="cv-exp-company" id="p-c3-company"></p>
+                    <ul class="cv-exp-bullets" id="p-c3-bullets"></ul>
+                  </div>
+                </section>
+
+                <section class="cv-sec" id="p-edu">
+                  <h2 class="cv-sec-title" data-i18n="cv_education">Formação</h2>
+                  <div class="cv-edu">
+                    <p class="cv-edu-course" id="p-edu-title"></p>
+                    <p class="cv-edu-inst" id="p-edu-meta"></p>
+                    <p class="cv-edu-desc" id="p-edu-desc"></p>
+                  </div>
+                </section>
+
+                <section class="cv-sec" id="p-certs">
+                  <h2 class="cv-sec-title" data-i18n="cv_certs">Certificações e Cursos</h2>
+                  <ul class="cv-lang-list" id="p-certs-list"></ul>
+                </section>
+              </main>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script defer src="assets/js/app.js?v=9"></script>
+</body>
+</html>
