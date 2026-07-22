@@ -8,13 +8,18 @@ Editor de currículo com preview em tempo real e exportação para PDF.
 
 HTML, CSS e JS puro. Sem dependências. Compatível com GitHub Pages.
 
-## Recursos
+## Funcionalidades
 
-- Preview em tempo real
-- Exportação para PDF (A4)
-- Suporte para português, inglês e espanhol
-- Salva dados automaticamente no navegador
+- Preview em tempo real do PDF
+- Exportação para PDF (formato A4)
+- 5 temas de cor (Indigo, Emerald, Rose, Amber, Slate)
+- Suporte a português, inglês e espanhol
+- Seção de Projetos
 - Controle de visibilidade por seção
+- Importar/exportar dados em JSON
+- Reset e limpar campos
+- Salva dados automaticamente no navegador
+- Print CSS otimizado para exportação
 
 ## Estrutura
 
@@ -23,6 +28,7 @@ index.html
 assets/
   favicon.svg
   css/styles.css
+  css/print.css
   js/app.js
 ```
 

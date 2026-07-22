@@ -24,6 +24,7 @@ const I18N = {
     toggle_languages: 'Idiomas',
     toggle_certs: 'Certificações',
     toggle_highlights: 'Destaques',
+    toggle_projects: 'Projetos',
     sec_personal: 'Informações Pessoais',
     sec_contact: 'Contato',
     sec_stack: 'Stack de Tecnologias',
@@ -33,6 +34,7 @@ const I18N = {
     sec_languages: 'Idiomas',
     sec_certs: 'Certificações e Cursos',
     sec_highlights: 'Destaques',
+    sec_projects: 'Projetos',
     lbl_name: 'Nome Completo',
     lbl_role: 'Profissão / Título',
     lbl_summary: 'Resumo Profissional (1-2 linhas)',
@@ -48,7 +50,7 @@ const I18N = {
     lbl_c1_bullets: 'Realizações do Cargo 1 (uma por linha)',
     lbl_c2_title: 'Cargo 2 (anterior)',
     lbl_c2_company: 'Empresa do Cargo 2',
-    lbl_c2_meta: 'Metadados do Cargo 2 (local, tipo)',
+    lbl_c2_meta: 'Cargo 2 - Local e Tipo',
     lbl_c2_date: 'Datas do Cargo 2',
     lbl_c2_bullets: 'Realizações do Cargo 2 (uma por linha)',
     lbl_c3_title: 'Empresa/cargo anterior (opcional)',
@@ -60,9 +62,14 @@ const I18N = {
     lbl_edu_desc: 'Descrição',
     lbl_langs: 'Idiomas (formato: "Nome · Nível", um por linha)',
     help_langs: 'Formato: "Português · Nativo" — cada um em uma linha',
+    help_proj_tech: 'Separe com vírgulas',
     lbl_certs: 'Certificações (uma por linha)',
     help_certs: 'Use uma linha para cada certificado ou curso relevante',
     lbl_highlights: 'Destaques Principais (um por linha)',
+    lbl_proj_desc: 'Descrição',
+    lbl_proj_link: 'Link (URL)',
+    lbl_proj_tech: 'Tecnologias',
+    lbl_proj_title: 'Título do Projeto',
     panel_preview_title: 'Pré-visualização do CV',
     panel_preview_sub: 'Pré-visualização em tempo real do PDF',
     badge_a4: 'A4 Pronto',
@@ -72,10 +79,27 @@ const I18N = {
     cv_skills: 'Habilidades Técnicas',
     cv_languages: 'Idiomas',
     cv_highlights: 'Destaques',
+    cv_projects: 'Projetos',
     cv_experience: 'Experiência',
     cv_education: 'Formação',
     cv_certs: 'Certificações e Cursos',
-    confirm_clear: 'Limpar todos os campos? Esta ação não pode ser desfeita.',
+    lbl_linkedin: 'LinkedIn (usuário)',
+    lbl_github: 'GitHub (usuário)',
+    lbl_link1_label: 'Link Extra 1 - Label',
+    lbl_link1_url: 'Link Extra 1 - URL',
+    lbl_link2_label: 'Link Extra 2 - Label',
+    lbl_link2_url: 'Link Extra 2 - URL',
+    lbl_sk1_label: 'Categoria 1 - Label',
+    lbl_sk1_skills: 'Categoria 1 - Habilidades',
+    lbl_sk2_label: 'Categoria 2 - Label',
+    lbl_sk2_skills: 'Categoria 2 - Habilidades',
+    lbl_sk3_label: 'Categoria 3 - Label',
+    lbl_sk3_skills: 'Categoria 3 - Habilidades',
+    lbl_sk4_label: 'Categoria 4 - Label',
+    lbl_sk4_skills: 'Categoria 4 - Habilidades',
+    cv_linkedin: 'LinkedIn',
+    cv_github: 'GitHub',
+    confirm_clear: 'Limpar todos os campos? Essa ação não pode ser desfeita.',
     confirm_reset: 'Tem certeza que deseja restaurar todos os valores padrão?',
     popup_blocked: 'Pop-up bloqueado. Permita pop-ups para gerar o PDF.'
   },
@@ -88,11 +112,27 @@ const I18N = {
     btn_import: 'Import JSON',
     btn_export: 'Export JSON',
     btn_pdf: 'Download PDF',
-    import_error: 'Error importing file. Please check if it is a valid JSON.',
+    import_error: 'Error importing file. Please check if it is valid JSON.',
     import_success: 'Data imported successfully!',
     panel_edit_title: 'Editable Fields',
     panel_edit_sub: 'Edit your resume in real-time',
     badge_live: 'Live Preview',
+    lbl_linkedin: 'LinkedIn (user)',
+    lbl_github: 'GitHub (user)',
+    lbl_link1_label: 'Extra Link 1 - Label',
+    lbl_link1_url: 'Extra Link 1 - URL',
+    lbl_link2_label: 'Extra Link 2 - Label',
+    lbl_link2_url: 'Extra Link 2 - URL',
+    lbl_sk1_label: 'Category 1 - Label',
+    lbl_sk1_skills: 'Category 1 - Skills',
+    lbl_sk2_label: 'Category 2 - Label',
+    lbl_sk2_skills: 'Category 2 - Skills',
+    lbl_sk3_label: 'Category 3 - Label',
+    lbl_sk3_skills: 'Category 3 - Skills',
+    lbl_sk4_label: 'Category 4 - Label',
+    lbl_sk4_skills: 'Category 4 - Skills',
+    cv_linkedin: 'LinkedIn',
+    cv_github: 'GitHub',
     toggles_title: 'Visible Sections in PDF',
     toggle_contact: 'Contact',
     toggle_stack: 'Stack',
@@ -102,6 +142,7 @@ const I18N = {
     toggle_languages: 'Languages',
     toggle_certs: 'Certifications',
     toggle_highlights: 'Highlights',
+    toggle_projects: 'Projects',
     sec_personal: 'Personal Information',
     sec_contact: 'Contact',
     sec_stack: 'Technology Stack',
@@ -111,6 +152,7 @@ const I18N = {
     sec_languages: 'Languages',
     sec_certs: 'Certifications & Courses',
     sec_highlights: 'Highlights',
+    sec_projects: 'Projects',
     lbl_name: 'Full Name',
     lbl_role: 'Profession / Title',
     lbl_summary: 'Professional Summary (1-2 lines)',
@@ -118,7 +160,7 @@ const I18N = {
     lbl_phone: 'Phone (optional)',
     lbl_location: 'Location',
     lbl_stack: 'Technologies (comma-separated)',
-    help_stack: 'Separate with commas. Known technologies appear as highlighted',
+    help_stack: 'Separate with commas. Known technologies are highlighted',
     lbl_company1_name: 'Company 1 - Name',
     lbl_company1_meta: 'Company 1 - Location & Type',
     lbl_c1_title: 'Position 1 (most recent)',
@@ -126,7 +168,7 @@ const I18N = {
     lbl_c1_bullets: 'Position 1 accomplishments (one per line)',
     lbl_c2_title: 'Position 2 (previous)',
     lbl_c2_company: 'Position 2 Company',
-    lbl_c2_meta: 'Position 2 metadata (location, type)',
+    lbl_c2_meta: 'Position 2 - Location & Type',
     lbl_c2_date: 'Position 2 dates',
     lbl_c2_bullets: 'Position 2 accomplishments (one per line)',
     lbl_c3_title: 'Previous company/position (optional)',
@@ -138,18 +180,24 @@ const I18N = {
     lbl_edu_desc: 'Description',
     lbl_langs: 'Languages (format: "Name · Level", one per line)',
     help_langs: 'Format: "Portuguese · Native" — each on a line',
+    help_proj_tech: 'Separate with commas',
     lbl_certs: 'Certifications (one per line)',
     help_certs: 'Use one line for each certificate or relevant course',
     lbl_highlights: 'Key Highlights (one per line)',
+    lbl_proj_desc: 'Description',
+    lbl_proj_link: 'Link (URL)',
+    lbl_proj_tech: 'Technologies',
+    lbl_proj_title: 'Project Title',
     panel_preview_title: 'CV Preview',
     panel_preview_sub: 'Real-time PDF preview',
-    badge_a4: 'A4 Ready',
+    badge_a4: 'A4 Format',
     cv_email: 'Email',
     cv_phone: 'Phone',
     cv_location: 'Location',
     cv_skills: 'Technical Skills',
     cv_languages: 'Languages',
     cv_highlights: 'Highlights',
+    cv_projects: 'Projects',
     cv_experience: 'Experience',
     cv_education: 'Education',
     cv_certs: 'Certifications & Courses',
@@ -180,6 +228,7 @@ const I18N = {
     toggle_languages: 'Idiomas',
     toggle_certs: 'Certificaciones',
     toggle_highlights: 'Destacados',
+    toggle_projects: 'Proyectos',
     sec_personal: 'Información Personal',
     sec_contact: 'Contacto',
     sec_stack: 'Stack de Tecnologías',
@@ -189,6 +238,7 @@ const I18N = {
     sec_languages: 'Idiomas',
     sec_certs: 'Certificaciones y Cursos',
     sec_highlights: 'Destacados',
+    sec_projects: 'Proyectos',
     lbl_name: 'Nombre Completo',
     lbl_role: 'Profesión / Título',
     lbl_summary: 'Resumen Profesional (1-2 líneas)',
@@ -204,7 +254,7 @@ const I18N = {
     lbl_c1_bullets: 'Logros del Cargo 1 (uno por línea)',
     lbl_c2_title: 'Cargo 2 (anterior)',
     lbl_c2_company: 'Empresa del Cargo 2',
-    lbl_c2_meta: 'Metadatos del Cargo 2 (ubicación, tipo)',
+    lbl_c2_meta: 'Cargo 2 - Ubicación y Tipo',
     lbl_c2_date: 'Fechas del Cargo 2',
     lbl_c2_bullets: 'Logros del Cargo 2 (uno por línea)',
     lbl_c3_title: 'Empresa/cargo anterior (opcional)',
@@ -216,26 +266,60 @@ const I18N = {
     lbl_edu_desc: 'Descripción',
     lbl_langs: 'Idiomas (formato: "Nombre · Nivel", uno por línea)',
     help_langs: 'Formato: "Portugués · Nativo" — cada uno en una línea',
+    help_proj_tech: 'Separe con comas',
     lbl_certs: 'Certificaciones (una por línea)',
     help_certs: 'Use una línea para cada certificado o curso relevante',
     lbl_highlights: 'Destacados Principales (uno por línea)',
+    lbl_proj_desc: 'Descripción',
+    lbl_proj_link: 'Enlace (URL)',
+    lbl_proj_tech: 'Tecnologías',
+    lbl_proj_title: 'Título del Proyecto',
     panel_preview_title: 'Vista Previa del CV',
     panel_preview_sub: 'Vista previa en tiempo real del PDF',
-    badge_a4: 'A4 Listo',
+    badge_a4: 'Formato A4',
     cv_email: 'Correo',
     cv_phone: 'Tel',
     cv_location: 'Ubicación',
     cv_skills: 'Habilidades Técnicas',
     cv_languages: 'Idiomas',
     cv_highlights: 'Destacados',
+    cv_projects: 'Proyectos',
     cv_experience: 'Experiencia',
     cv_education: 'Formación',
     cv_certs: 'Certificaciones y Cursos',
+    lbl_linkedin: 'LinkedIn (usuario)',
+    lbl_github: 'GitHub (usuario)',
+    lbl_link1_label: 'Enlace Extra 1 - Etiqueta',
+    lbl_link1_url: 'Enlace Extra 1 - URL',
+    lbl_link2_label: 'Enlace Extra 2 - Etiqueta',
+    lbl_link2_url: 'Enlace Extra 2 - URL',
+    lbl_sk1_label: 'Categoría 1 - Etiqueta',
+    lbl_sk1_skills: 'Categoría 1 - Habilidades',
+    lbl_sk2_label: 'Categoría 2 - Etiqueta',
+    lbl_sk2_skills: 'Categoría 2 - Habilidades',
+    lbl_sk3_label: 'Categoría 3 - Etiqueta',
+    lbl_sk3_skills: 'Categoría 3 - Habilidades',
+    lbl_sk4_label: 'Categoría 4 - Etiqueta',
+    lbl_sk4_skills: 'Categoría 4 - Habilidades',
+    cv_linkedin: 'LinkedIn',
+    cv_github: 'GitHub',
     confirm_clear: '¿Limpiar todos los campos? Esta acción no se puede deshacer.',
     confirm_reset: '¿Está seguro de que desea restaurar todos los valores predeterminados?',
     popup_blocked: 'Pop-up bloqueado. Permita pop-ups para generar el PDF.'
   }
 };
+
+var THEMES = ['indigo', 'emerald', 'rose', 'amber', 'slate'];
+var currentTheme = 'indigo';
+
+function setTheme(theme) {
+  if (THEMES.indexOf(theme) === -1) return;
+  currentTheme = theme;
+  localStorage.setItem('cv-theme', theme);
+  document.getElementById('paper').setAttribute('data-theme', theme);
+  var sel = document.getElementById('theme-select');
+  if (sel) sel.value = theme;
+}
 
 let currentLang = 'pt';
 
@@ -266,6 +350,7 @@ const SECTION_MAP = {
   'toggle-skills': '#p-skills',
   'toggle-langs': '#p-langs-section',
   'toggle-certs': '#p-certs',
+  'toggle-proj': '#p-proj',
   'toggle-highlights': '#p-highlights'
 };
 
@@ -310,10 +395,22 @@ const updateConfig = {
   'f-sk4': { type: 'tags', target: 'p-sk4', wrappers: ['sk4-group'] },
   'f-langs': { type: 'langs', target: 'p-langs' },
   'f-certs': { type: 'certs', target: 'p-certs-list' },
-  'f-highlights': { type: 'highlights', target: 'p-highlights-list' }
+  'f-highlights': { type: 'highlights', target: 'p-highlights-list' },
+  'f-proj1-title': { type: 'text', target: 'p-proj1-title', wrapper: 'p-proj1' },
+  'f-proj1-desc': { type: 'text', target: 'p-proj1-desc' },
+  'f-proj1-link': { type: 'projlink', target: 'p-proj1-link' },
+  'f-proj1-tech': { type: 'tags', target: 'p-proj1-tech' },
+  'f-proj2-title': { type: 'text', target: 'p-proj2-title', wrapper: 'p-proj2' },
+  'f-proj2-desc': { type: 'text', target: 'p-proj2-desc' },
+  'f-proj2-link': { type: 'projlink', target: 'p-proj2-link' },
+  'f-proj2-tech': { type: 'tags', target: 'p-proj2-tech' },
+  'f-proj3-title': { type: 'text', target: 'p-proj3-title', wrapper: 'p-proj3' },
+  'f-proj3-desc': { type: 'text', target: 'p-proj3-desc' },
+  'f-proj3-link': { type: 'projlink', target: 'p-proj3-link' },
+  'f-proj3-tech': { type: 'tags', target: 'p-proj3-tech' }
 };
 
-const HOT_TECHNOLOGIES = ['Python', 'Flask', 'FastAPI', 'Node', 'Go', 'Rust', 'TypeScript', 'Java', 'Kotlin', 'React', 'Vue'];
+const HOT_TECHNOLOGIES = ['Python', 'Flask', 'FastAPI', 'Node', 'Go', 'Rust', 'TypeScript', 'Java', 'Kotlin', 'React', 'Vue', 'GraphQL', 'AWS', 'Docker', 'Kubernetes', 'PostgreSQL', 'MongoDB', 'Redis', 'RabbitMQ', 'Kafka', 'Terraform', 'Ansible', 'CI/CD', 'GitHub Actions', 'Playwright', 'Cypress'];
 
 let originalValues = {};
 let saveDraftTimeout;
@@ -338,16 +435,8 @@ function createEl(tag, className, text) {
   return el;
 }
 
-function updateField(fieldId) {
-  var config = updateConfig[fieldId];
-  if (!config) return;
-
-  var input = document.getElementById(fieldId);
-  if (!input) return;
-
-  var value = input.value.trim();
-
-  if (config.type === 'name') {
+var fieldHandlers = {
+  name: function(config, value) {
     var parts = value.split(/\s+/);
     var first = parts[0] || '';
     var rest = parts.slice(1).join(' ');
@@ -362,7 +451,8 @@ function updateField(fieldId) {
         el.appendChild(em);
       }
     }
-  } else if (config.type === 'role') {
+  },
+  role: function(config, value) {
     var el = document.getElementById('p-role');
     if (el) {
       el.textContent = '';
@@ -379,41 +469,48 @@ function updateField(fieldId) {
         }
       });
     }
-  } else if (config.type === 'stack') {
+  },
+  stack: function(config, value) {
     var el = document.getElementById('p-stack');
     if (el) {
       el.textContent = '';
       parseTags(value).forEach(function(tag) {
         var isHot = HOT_TECHNOLOGIES.indexOf(tag) !== -1;
-        var chip = createEl('span', 'cv-stack-chip' + (isHot ? ' hot' : ''), tag);
-        el.appendChild(chip);
+        el.appendChild(createEl('span', 'cv-stack-chip' + (isHot ? ' hot' : ''), tag));
       });
     }
-  } else if (config.type === 'text') {
+  },
+  text: function(config, value) {
     var el = document.getElementById(config.target);
     if (el) el.textContent = value;
-  } else if (config.type === 'email') {
+  },
+  email: function(config, value) {
     var linkEl = document.getElementById('p-email-a');
     var spanEl = document.getElementById('p-email');
     if (linkEl) linkEl.href = 'mailto:' + value;
     if (spanEl) spanEl.textContent = value;
-  } else if (config.type === 'phone') {
+  },
+  phone: function(config, value) {
     var el = document.getElementById('p-phone');
     if (el) el.textContent = value;
-  } else if (config.type === 'linkedin') {
+  },
+  linkedin: function(config, value) {
     var linkEl = document.getElementById(config.link);
     var spanEl = document.getElementById(config.span);
     if (linkEl) linkEl.href = value ? 'https://linkedin.com/in/' + value : '';
     if (spanEl) spanEl.textContent = value;
-  } else if (config.type === 'github') {
+  },
+  github: function(config, value) {
     var linkEl = document.getElementById(config.link);
     var spanEl = document.getElementById(config.span);
     if (linkEl) linkEl.href = value ? 'https://github.com/' + value : '';
     if (spanEl) spanEl.textContent = value;
-  } else if (config.type === 'label') {
+  },
+  label: function(config, value) {
     var el = document.getElementById(config.target);
     if (el) el.textContent = value;
-  } else if (config.type === 'customlink') {
+  },
+  customlink: function(config, value) {
     var href = value;
     if (href && !/^https?:\/\//i.test(href)) {
       href = 'https://' + value;
@@ -422,7 +519,8 @@ function updateField(fieldId) {
     var spanEl = document.getElementById(config.span);
     if (linkEl) linkEl.href = href || '';
     if (spanEl) spanEl.textContent = value.replace(/^https?:\/\//i, '');
-  } else if (config.type === 'bullets') {
+  },
+  bullets: function(config, value) {
     var el = document.getElementById(config.target);
     if (el) {
       el.textContent = '';
@@ -432,7 +530,8 @@ function updateField(fieldId) {
         el.appendChild(li);
       });
     }
-  } else if (config.type === 'tags') {
+  },
+  tags: function(config, value) {
     var el = document.getElementById(config.target);
     if (el) {
       el.textContent = '';
@@ -440,7 +539,8 @@ function updateField(fieldId) {
         el.appendChild(createEl('span', 'cv-tag', tag));
       });
     }
-  } else if (config.type === 'langs') {
+  },
+  langs: function(config, value) {
     var el = document.getElementById(config.target);
     if (el) {
       el.textContent = '';
@@ -452,7 +552,8 @@ function updateField(fieldId) {
         el.appendChild(li);
       });
     }
-  } else if (config.type === 'certs') {
+  },
+  certs: function(config, value) {
     var el = document.getElementById(config.target);
     if (el) {
       el.textContent = '';
@@ -462,7 +563,8 @@ function updateField(fieldId) {
         el.appendChild(li);
       });
     }
-  } else if (config.type === 'highlights') {
+  },
+  highlights: function(config, value) {
     var el = document.getElementById(config.target);
     if (el) {
       el.textContent = '';
@@ -472,13 +574,33 @@ function updateField(fieldId) {
         el.appendChild(li);
       });
     }
+  },
+  projlink: function(config, value) {
+    var el = document.getElementById(config.target);
+    if (!el) return;
+    if (value) {
+      var href = value;
+      if (!/^https?:\/\//i.test(href)) href = 'https://' + href;
+      el.href = href;
+      el.textContent = value.replace(/^https?:\/\//i, '').replace(/\/$/, '');
+      el.style.display = '';
+    } else {
+      el.style.display = 'none';
+    }
   }
+};
 
+function updateField(fieldId) {
+  var config = updateConfig[fieldId];
+  if (!config) return;
+  var input = document.getElementById(fieldId);
+  if (!input) return;
+  var value = input.value.trim();
+  var handler = fieldHandlers[config.type];
+  if (handler) handler(config, value);
   if (config.wrapper) {
     var wrapperEl = document.getElementById(config.wrapper);
-    if (wrapperEl) {
-      wrapperEl.style.display = value ? '' : 'none';
-    }
+    if (wrapperEl) wrapperEl.style.display = value ? '' : 'none';
   }
   if (config.wrappers) {
     var display = value ? '' : 'none';
@@ -560,14 +682,28 @@ async function downloadPDF() {
   if (!paperEl) return;
 
   var paperClone = paperEl.cloneNode(true);
-  
-  paperClone.querySelectorAll('[style*="display: none"], [style*="display:none"]').forEach(function(el) {
-    el.remove();
-  });
-  
+
   paperClone.removeAttribute('style');
   paperClone.querySelectorAll('[style]').forEach(function(el) {
     el.removeAttribute('style');
+  });
+
+  Object.keys(updateConfig).forEach(function(fieldId) {
+    var cfg = updateConfig[fieldId];
+    if (!cfg.wrapper && !cfg.wrappers) return;
+    var input = document.getElementById(fieldId);
+    var value = input ? input.value.trim() : '';
+    var display = value ? '' : 'none';
+    if (cfg.wrapper) {
+      var w = paperClone.querySelector('#' + cfg.wrapper);
+      if (w) w.style.display = display;
+    }
+    if (cfg.wrappers) {
+      cfg.wrappers.forEach(function(id) {
+        var w = paperClone.querySelector('#' + id);
+        if (w) w.style.display = display;
+      });
+    }
   });
 
   Object.entries(SECTION_MAP).forEach(function(entry) {
@@ -582,72 +718,23 @@ async function downloadPDF() {
 
   saveSectionPreferences();
 
-  var css = [
-    "@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');",
-    '@page { size: A4 portrait; margin: 0; }',
-    '*, *::before, *::after { box-sizing: border-box !important; margin: 0 !important; padding: 0 !important; }',
-    'html, body, article, header, aside, main, section, div, p, h1, h2, ul, li { margin: 0 !important; padding: 0 !important; }',
-    'html, body { background: #fff !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; font-family: "Plus Jakarta Sans", system-ui, sans-serif !important; font-size: 9pt !important; line-height: 1.55 !important; width: 210mm !important; min-height: 0 !important; height: auto !important; }',
-    'article, header, aside, main, section { display: block !important; min-height: 0 !important; }',
-    'a { text-decoration: none !important; color: inherit !important; }',
-    '.paper { margin: 0 !important; padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; width: 210mm !important; max-width: 210mm !important; font-size: 9pt !important; overflow: visible !important; background: #fff !important; display: block !important; min-height: 0 !important; break-inside: auto !important; page-break-inside: auto !important; }',
-    '.cv-head { padding: 14px 16px 0 16px !important; background: linear-gradient(135deg, #0b1120 0%, #131b2e 60%, #1a1f3d 100%) !important; display: block !important; overflow: hidden !important; }',
-    '.cv-head::before { content: none !important; display: none !important; }',
-    '.cv-head-top { display: grid !important; grid-template-columns: 1fr auto !important; gap: 16px !important; padding: 0 !important; align-items: start !important; margin-bottom: 8px !important; position: relative !important; }',
-    '.cv-name { font-size: 28pt !important; font-weight: 800 !important; letter-spacing: -0.065em !important; line-height: 0.95 !important; color: #fff !important; text-align: left !important; margin: 0 !important; padding: 0 !important; }',
-    '.cv-name em { font-style: normal !important; font-weight: 300 !important; color: rgba(255,255,255,.5) !important; letter-spacing: -0.04em !important; }',
-    '.cv-role { margin: 6px 0 0 0 !important; padding: 0 !important; font-size: 7pt !important; font-weight: 600 !important; letter-spacing: 0.11em !important; text-transform: uppercase !important; color: rgba(255,255,255,.45) !important; text-align: left !important; }',
-    '.cv-role strong { color: #a5b4fc !important; font-weight: 700 !important; }',
-    '.cv-stack { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; margin: 8px 0 0 0 !important; padding: 0 !important; justify-content: flex-start !important; }',
-    '.cv-stack-chip { background: rgba(255,255,255,.07) !important; border: 1px solid rgba(255,255,255,.12) !important; border-radius: 6px !important; padding: 3px 10px !important; font-size: 7pt !important; font-weight: 600 !important; color: rgba(255,255,255,.65) !important; font-family: "JetBrains Mono", monospace !important; letter-spacing: 0.02em !important; margin: 0 !important; }',
-    '.cv-stack-chip.hot { background: rgba(165,180,252,.12) !important; border-color: rgba(165,180,252,.28) !important; color: #a5b4fc !important; }',
-    '.cv-contacts { display: grid !important; gap: 5px !important; text-align: right !important; align-self: flex-start !important; margin: 0 !important; padding: 0 !important; }',
-    '.cv-cr { font-size: 7.2pt !important; color: rgba(255,255,255,.5) !important; display: flex !important; align-items: center !important; justify-content: flex-end !important; gap: 9px !important; margin: 0 !important; padding: 0 !important; }',
-    '.cv-cr-label { font-weight: 720 !important; color: rgba(255,255,255,.78) !important; min-width: 55px !important; text-align: right !important; font-size: 6.8pt !important; }',
-    '.cv-cr a { color: #a5b4fc !important; word-break: break-word !important; }',
-    '.cv-summary-strip { background: rgba(255,255,255,.04) !important; border-top: 1px solid rgba(255,255,255,.07) !important; padding: 7px 16px !important; margin: 8px 0 0 0 !important; font-size: 8.4pt !important; color: rgba(255,255,255,.6) !important; line-height: 1.6 !important; }',
-    '.cv-body { display: block !important; width: 100% !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; }',
-    '.cv-body::after { content: "" !important; display: block !important; clear: both !important; }',
-    '.cv-side { float: left !important; width: 33.333% !important; background: #fafbfd !important; color: #111827 !important; padding: 14px !important; margin: 0 !important; border-right: 1px solid #ebeef3 !important; box-sizing: border-box !important; }',
-    '.cv-main { display: block !important; margin: 0 0 0 33.333% !important; padding: 12px 16px 14px !important; box-sizing: border-box !important; overflow: hidden !important; }',
-    '.cv-sec { margin: 0 0 10px 0 !important; padding: 0 !important; break-inside: avoid !important; page-break-inside: avoid !important; }',
-    '.cv-sec:last-child { margin-bottom: 0 !important; }',
-    '.cv-sec-title { font-size: 6.4pt !important; font-weight: 820 !important; letter-spacing: 0.22em !important; text-transform: uppercase !important; color: #4f46e5 !important; margin: 0 0 8px 0 !important; padding: 0 0 5px 0 !important; border-bottom: 1.8px solid #e0e7ff !important; }',
-    '.cv-skill-group { margin: 0 0 6px 0 !important; padding: 0 !important; }',
-    '.cv-skill-group:last-child { margin-bottom: 0 !important; }',
-    '.cv-skill-label { font-size: 6.2pt !important; font-weight: 720 !important; letter-spacing: 0.11em !important; text-transform: uppercase !important; color: #6b7280 !important; margin: 0 0 6px 0 !important; padding: 0 !important; }',
-    '.cv-tags { display: flex !important; flex-wrap: wrap !important; gap: 4px !important; margin: 0 !important; padding: 0 !important; }',
-    '.cv-tag { background: #eef2ff !important; color: #3730a3 !important; border: 1px solid rgba(79,70,229,.16) !important; border-radius: 5px !important; padding: 3px 8px !important; margin: 0 !important; font-size: 6.8pt !important; font-weight: 650 !important; }',
-    '.cv-lang-list { list-style: none !important; margin: 0 !important; padding: 0 !important; }',
-    '.cv-lang-list li { font-size: 7.8pt !important; color: #374151 !important; padding: 3px 0 !important; margin: 0 !important; border-bottom: 1px solid #f0f2f5 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; gap: 8px !important; }',
-    '.cv-lang-list li:last-child { border-bottom: none !important; }',
-    '.cv-lang-name { font-weight: 650 !important; color: #111827 !important; }',
-    '.cv-lang-level { font-size: 6.8pt !important; color: #6b7280 !important; font-weight: 520 !important; }',
-    '.cv-highlights-list { list-style: none !important; display: flex !important; flex-direction: column !important; gap: 5px !important; margin: 0 !important; padding: 0 !important; }',
-    '.cv-highlights-list li { font-size: 7.6pt !important; color: #374151 !important; padding: 6px 9px !important; margin: 0 !important; background: #fafbfc !important; border-left: 3px solid #4f46e5 !important; border-radius: 3px !important; box-shadow: 0 1px 2px rgba(0,0,0,.06) !important; line-height: 1.45 !important; }',
-    '.cv-highlights-list li:nth-child(1) { border-left-color: #4f46e5 !important; }',
-    '.cv-highlights-list li:nth-child(2) { border-left-color: #06b6d4 !important; }',
-    '.cv-highlights-list li:nth-child(3) { border-left-color: #10b981 !important; }',
-    '.cv-highlights-list li:nth-child(4) { border-left-color: #f59e0b !important; }',
-    '.cv-highlights-list li:nth-child(5) { border-left-color: #ef4444 !important; }',
-    '.cv-highlight-text { font-weight: 600 !important; color: #111827 !important; display: block !important; }',
-    '.cv-exp-head { display: flex !important; justify-content: space-between !important; align-items: flex-start !important; gap: 12px !important; margin: 0 0 6px 0 !important; padding: 0 !important; }',
-    '.cv-exp-title { font-size: 9.2pt !important; font-weight: 820 !important; color: #0b1120 !important; margin: 0 !important; padding: 0 !important; }',
-    '.cv-exp-date { font-size: 6.2pt !important; font-weight: 650 !important; color: #4f46e5 !important; white-space: nowrap !important; font-family: "JetBrains Mono", monospace !important; background: #eef2ff !important; border: 1px solid rgba(79,70,229,.16) !important; padding: 3px 7px !important; margin: 0 !important; border-radius: 5px !important; flex-shrink: 0 !important; }',
-    '.cv-exp-company { font-size: 7.2pt !important; color: #6b7280 !important; margin: 0 0 6px 0 !important; padding: 0 !important; font-weight: 540 !important; }',
-    '.cv-exp-bullets { padding: 0 0 0 14px !important; margin: 0 !important; color: #4b5563 !important; font-size: 7.8pt !important; line-height: 1.55 !important; list-style: disc !important; }',
-    '.cv-exp-bullets li { margin: 0 0 2px 0 !important; padding: 0 !important; }',
-    '.cv-exp-bullets li b { color: #111827 !important; font-weight: 720 !important; }',
-    '.cv-exp-standalone { margin: 0 0 9px 0 !important; padding: 0 0 9px 11px !important; border-bottom: 1px solid #f0f2f5 !important; border-left: 2.5px solid #e0e7ff !important; position: relative !important; }',
-    '.cv-exp-standalone:last-child { margin-bottom: 0 !important; padding-bottom: 0 !important; border-bottom: none !important; }',
-    '.cv-exp-standalone::before { content: "" !important; position: absolute !important; left: -4px !important; top: 7px !important; width: 6px !important; height: 6px !important; background: #4f46e5 !important; border-radius: 50% !important; border: 1.8px solid #fff !important; box-shadow: 0 0 0 1.2px #4f46e5 !important; }',
-    '.cv-edu { background: #f8f9fb !important; border: 1px solid #e9edf3 !important; border-radius: 8px !important; padding: 11px 14px !important; margin: 0 !important; }',
-    '.cv-edu-course { font-size: 9.2pt !important; font-weight: 820 !important; color: #0b1120 !important; margin: 0 !important; padding: 0 !important; }',
-    '.cv-edu-inst { font-size: 7.2pt !important; color: #6b7280 !important; margin: 3px 0 0 0 !important; padding: 0 !important; font-weight: 540 !important; }',
-    '.cv-edu-desc { font-size: 7.6pt !important; color: #6b7280 !important; margin: 5px 0 0 0 !important; padding: 0 !important; line-height: 1.6 !important; }',
-    '.spacer-sm { height: 4px !important; margin: 0 !important; padding: 0 !important; }',
-    '@media print { @page { size: A4 portrait; margin: 0; } html, body { width: 210mm !important; height: auto !important; margin: 0 !important; padding: 0 !important; } .paper { width: 210mm !important; } .cv-body { display: block !important; } .cv-side { float: left !important; width: 33.333% !important; } .cv-main { display: block !important; margin-left: 33.333% !important; overflow: hidden !important; } .cv-sec, .cv-edu, .cv-exp-standalone, .cv-highlights-list li, .cv-lang-list li { break-inside: avoid !important; page-break-inside: avoid !important; } }'
-  ].join('\n');
+  var fontImport = "@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');";
+
+  var allThemesFallback = ':root{--cv-accent:#4f46e5;--cv-accent-dark:#3730a3;--cv-accent-soft:#eef2ff;--cv-accent-mid:rgba(79,70,229,0.16);--cv-accent-border:#e0e7ff;--cv-link:#a5b4fc;--cv-tag-color:#3730a3;--cv-tag-border:rgba(79,70,229,0.14)}[data-theme=emerald]{--cv-accent:#059669;--cv-accent-dark:#047857;--cv-accent-soft:#d1fae5;--cv-accent-mid:rgba(5,150,105,0.16);--cv-accent-border:#a7f3d0;--cv-link:#6ee7b7;--cv-tag-color:#047857;--cv-tag-border:rgba(5,150,105,0.14)}[data-theme=rose]{--cv-accent:#e11d48;--cv-accent-dark:#be123c;--cv-accent-soft:#ffe4e6;--cv-accent-mid:rgba(225,29,72,0.16);--cv-accent-border:#fecdd3;--cv-link:#fda4af;--cv-tag-color:#be123c;--cv-tag-border:rgba(225,29,72,0.14)}[data-theme=amber]{--cv-accent:#d97706;--cv-accent-dark:#b45309;--cv-accent-soft:#fef3c7;--cv-accent-mid:rgba(217,119,6,0.16);--cv-accent-border:#fde68a;--cv-link:#fcd34d;--cv-tag-color:#b45309;--cv-tag-border:rgba(217,119,6,0.14)}[data-theme=slate]{--cv-accent:#475569;--cv-accent-dark:#334155;--cv-accent-soft:#f1f5f9;--cv-accent-mid:rgba(71,85,105,0.16);--cv-accent-border:#cbd5e1;--cv-link:#94a3b8;--cv-tag-color:#334155;--cv-tag-border:rgba(71,85,105,0.14)}';
+
+  var stylesCss = '';
+  var printCss = '';
+  try {
+    var linkEl = document.querySelector('link[rel="stylesheet"][href*="styles"]');
+    var resp = await fetch(linkEl ? linkEl.href : 'assets/css/styles.css');
+    if (resp.ok) stylesCss = await resp.text();
+    var printLinkEl = document.querySelector('link[rel="stylesheet"][href*="print"]');
+    var resp2 = await fetch(printLinkEl ? printLinkEl.href : 'assets/css/print.css');
+    if (resp2.ok) printCss = await resp2.text();
+  } catch (e) {}
+  if (!stylesCss) stylesCss = allThemesFallback;
+  if (!printCss) printCss = '@page{size:A4 portrait;margin:0}*,*::before,*::after{box-sizing:border-box!important;margin:0!important;padding:0!important}html,body{background:#fff!important;width:210mm!important;height:auto!important;font-size:9pt!important;line-height:1.55!important;font-family:"Plus Jakarta Sans",system-ui,sans-serif!important}.paper{width:210mm!important;max-width:210mm!important;margin:0!important;padding:0!important;border-radius:0!important;box-shadow:none!important}.cv-head{padding:14px 16px 0 16px!important;background:linear-gradient(135deg,#0b1120 0,#131b2e 60%,#1a1f3d 100%)!important}.cv-body{display:block!important}.cv-side{float:left!important;width:33.333%!important;background:#fafbfd!important;padding:14px!important;border-right:1px solid #ebeef3!important}.cv-main{display:block!important;margin:0 0 0 33.333%!important;padding:12px 16px 14px!important;overflow:hidden!important}.cv-sec,.cv-edu,.cv-exp-standalone,.cv-proj{break-inside:avoid!important;page-break-inside:avoid!important}.cv-proj{padding:8px 10px!important;background:#f8f9fb!important;border:1px solid #ebeef3!important;border-radius:6px!important;margin:0 0 8px 0!important}.cv-proj-head{display:flex!important;justify-content:space-between!important;gap:8px!important;margin:0 0 4px 0!important}.cv-proj-title{font-size:8pt!important;font-weight:780!important;color:#0b1120!important}.cv-proj-link{font-size:6.5pt!important;color:#a5b4fc!important;word-break:break-all!important;white-space:normal!important;overflow:visible!important}.cv-proj-desc{font-size:7.2pt!important;color:#4b5563!important;line-height:1.5!important;margin:0 0 6px 0!important}.cv-proj .cv-tags{gap:3px!important}.cv-proj .cv-tag{font-size:6.2pt!important;padding:2px 6px!important}';
+  var css = fontImport + '\n' + stylesCss + '\n' + printCss;
 
   var html = '<!DOCTYPE html><html lang="' + currentLang + '"><head><meta charset="UTF-8"><meta name="viewport" content="width=1200"><title>' + fileName + ' — CV</title><style>' + css + '</style></head><body>' + paperClone.outerHTML + '</body></html>';
 
@@ -680,6 +767,8 @@ function captureOriginalValues() {
   });
 }
 
+
+
 function init() {
   var savedLang = localStorage.getItem('cv-lang');
   if (savedLang && I18N[savedLang]) {
@@ -691,6 +780,18 @@ function init() {
     langSelect.value = currentLang;
     langSelect.addEventListener('change', function() { setLang(langSelect.value); });
   }
+
+  var savedTheme = localStorage.getItem('cv-theme');
+  if (savedTheme && THEMES.indexOf(savedTheme) !== -1) {
+    currentTheme = savedTheme;
+  }
+
+  var themeSelect = document.getElementById('theme-select');
+  if (themeSelect) {
+    themeSelect.value = currentTheme;
+    themeSelect.addEventListener('change', function() { setTheme(themeSelect.value); });
+  }
+  setTheme(currentTheme);
 
   applyI18n();
   captureOriginalValues();
@@ -751,6 +852,7 @@ function init() {
   var importFile = document.getElementById('import-file');
   if (importBtn && importFile) {
     importBtn.addEventListener('click', function() {
+      importFile.value = '';
       importFile.click();
     });
     importFile.addEventListener('change', function(e) {

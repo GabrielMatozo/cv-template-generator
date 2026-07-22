@@ -23,7 +23,16 @@
         </div>
       </div>
       <div class="actions">
-        <div class="lang-wrapper">
+          <div class="theme-wrapper">
+            <select id="theme-select">
+              <option value="indigo">Indigo</option>
+              <option value="emerald">Emerald</option>
+              <option value="rose">Rose</option>
+              <option value="amber">Amber</option>
+              <option value="slate">Slate</option>
+            </select>
+          </div>
+          <div class="lang-wrapper">
           <svg class="lang-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           <select id="lang-select">
             <option value="pt">PT</option>
@@ -43,7 +52,7 @@
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           <span data-i18n="btn_import">Importar JSON</span>
         </button>
-        <input type="file" id="import-file" accept=".json" style="display:none" />
+        <input type="file" id="import-file" accept=".json" class="sr-only" />
         <button class="btn btn--ghost" id="export-btn">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span data-i18n="btn_export">Exportar JSON</span>
@@ -99,6 +108,9 @@
               <input type="checkbox" id="toggle-certs" class="section-toggle" /> <span data-i18n="toggle_certs">Certificações</span>
             </label>
             <label class="toggle-label">
+              <input type="checkbox" id="toggle-proj" class="section-toggle" /> <span data-i18n="toggle_projects">Projetos</span>
+            </label>
+            <label class="toggle-label">
               <input type="checkbox" id="toggle-highlights" class="section-toggle" checked /> <span data-i18n="toggle_highlights">Destaques</span>
             </label>
           </div>
@@ -145,27 +157,27 @@
                 <input id="f-location" type="text" value="Indaiatuba, São Paulo, Brasil" />
               </div>
               <div class="f f--full">
-                <label for="f-linkedin">LinkedIn (usuário)</label>
+                <label for="f-linkedin" data-i18n="lbl_linkedin">LinkedIn (usuário)</label>
                 <input id="f-linkedin" type="text" value="gabrielmatozo" placeholder="deixe vazio para ocultar" />
               </div>
               <div class="f f--full">
-                <label for="f-github">GitHub (usuário)</label>
+                <label for="f-github" data-i18n="lbl_github">GitHub (usuário)</label>
                 <input id="f-github" type="text" value="gabrielmatozo" placeholder="deixe vazio para ocultar" />
               </div>
               <div class="f f--full">
-                <label for="f-link1-label">Link Extra 1 - Label</label>
+                <label for="f-link1-label" data-i18n="lbl_link1_label">Link Extra 1 - Label</label>
                 <input id="f-link1-label" type="text" value="" />
               </div>
               <div class="f f--full">
-                <label for="f-link1">Link Extra 1 - URL</label>
+                <label for="f-link1" data-i18n="lbl_link1_url">Link Extra 1 - URL</label>
                 <input id="f-link1" type="text" value="" />
               </div>
               <div class="f f--full">
-                <label for="f-link2-label">Link Extra 2 - Label</label>
+                <label for="f-link2-label" data-i18n="lbl_link2_label">Link Extra 2 - Label</label>
                 <input id="f-link2-label" type="text" value="" />
               </div>
               <div class="f f--full">
-                <label for="f-link2">Link Extra 2 - URL</label>
+                <label for="f-link2" data-i18n="lbl_link2_url">Link Extra 2 - URL</label>
                 <input id="f-link2" type="text" value="" />
               </div>
             </div>
@@ -180,7 +192,7 @@
               <div class="f f--full">
                 <label for="f-stack" data-i18n="lbl_stack">Tecnologias (separadas por vírgula)</label>
                 <input id="f-stack" type="text" value="Prevenção a Fraudes, Automação de Segurança, Análise de Riscos, Resposta a Incidentes" />
-                <p class="help" data-i18n="help_stack">Separe com vírgulas. As primeiras aparecem como "destaque"</p>
+                <p class="help" data-i18n="help_stack">Tecnologias conhecidas aparecem como destaque. Separe com vírgulas</p>
               </div>
             </div>
           </div>
@@ -286,35 +298,35 @@ Desenvolvimento de automações para otimização do ambiente e suporte à dispo
             </p>
             <div class="fg">
               <div class="f">
-                <label for="f-sk1-label">Categoria 1 - Label</label>
+                <label for="f-sk1-label" data-i18n="lbl_sk1_label">Categoria 1 - Label</label>
                 <input id="f-sk1-label" type="text" value="Gestão de Riscos e Ameaças" />
               </div>
               <div class="f f--full">
-                <label for="f-sk1">Categoria 1 - Habilidades</label>
+                <label for="f-sk1" data-i18n="lbl_sk1_skills">Categoria 1 - Habilidades</label>
                 <input id="f-sk1" type="text" value="Análise de Riscos Cibernéticos, Prevenção a Fraudes Financeiras, Resposta a Incidentes (CSIRT), Análise de Logs" />
               </div>
               <div class="f">
-                <label for="f-sk2-label">Categoria 2 - Label</label>
+                <label for="f-sk2-label" data-i18n="lbl_sk2_label">Categoria 2 - Label</label>
                 <input id="f-sk2-label" type="text" value="Engenharia e Automação" />
               </div>
               <div class="f f--full">
-                <label for="f-sk2">Categoria 2 - Habilidades</label>
+                <label for="f-sk2" data-i18n="lbl_sk2_skills">Categoria 2 - Habilidades</label>
                 <input id="f-sk2" type="text" value="Automação de Processos de Segurança (Python), Análise de Dados (SQL), Testes Automatizados (Pytest e Gherkin)" />
               </div>
               <div class="f">
-                <label for="f-sk3-label">Categoria 3 - Label</label>
+                <label for="f-sk3-label" data-i18n="lbl_sk3_label">Categoria 3 - Label</label>
                 <input id="f-sk3-label" type="text" value="Infraestrutura e Ferramentas" />
               </div>
               <div class="f f--full">
-                <label for="f-sk3">Categoria 3 - Habilidades</label>
+                <label for="f-sk3" data-i18n="lbl_sk3_skills">Categoria 3 - Habilidades</label>
                 <input id="f-sk3" type="text" value="Adequação Técnica a Requisitos (LGPD e BACEN), Linux, Docker, Git, Jira, Confluence, Postman, Clean Architecture, SOLID" />
               </div>
               <div class="f">
-                <label for="f-sk4-label">Categoria 4 - Label</label>
+                <label for="f-sk4-label" data-i18n="lbl_sk4_label">Categoria 4 - Label</label>
                 <input id="f-sk4-label" type="text" value="" />
               </div>
               <div class="f f--full">
-                <label for="f-sk4">Categoria 4 - Habilidades</label>
+                <label for="f-sk4" data-i18n="lbl_sk4_skills">Categoria 4 - Habilidades</label>
                 <input id="f-sk4" type="text" value="" />
               </div>
             </div>
@@ -364,6 +376,66 @@ Suporte à Defesa: Construção de serviços e APIs (Flask/FastAPI) que dão sup
               </div>
             </div>
           </div>
+
+          <div class="fsec">
+            <p class="fsec-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <span data-i18n="sec_projects">Projetos</span>
+            </p>
+            <div class="fg">
+              <div class="f f--full">
+                <label for="f-proj1-title" data-i18n="lbl_proj_title">Título do Projeto</label>
+                <input id="f-proj1-title" type="text" />
+              </div>
+              <div class="f f--full">
+                <label for="f-proj1-desc" data-i18n="lbl_proj_desc">Descrição</label>
+                <textarea id="f-proj1-desc"></textarea>
+              </div>
+              <div class="f f--full">
+                <label for="f-proj1-link" data-i18n="lbl_proj_link">Link (URL)</label>
+                <input id="f-proj1-link" type="text" placeholder="https://github.com/..." />
+              </div>
+              <div class="f f--full">
+                <label for="f-proj1-tech" data-i18n="lbl_proj_tech">Tecnologias</label>
+                <input id="f-proj1-tech" type="text" placeholder="Python, FastAPI, Docker" />
+                <p class="help" data-i18n="help_proj_tech">Separe com vírgulas</p>
+              </div>
+              <div class="f f--full">
+                <label for="f-proj2-title" data-i18n="lbl_proj_title">Título do Projeto</label>
+                <input id="f-proj2-title" type="text" />
+              </div>
+              <div class="f f--full">
+                <label for="f-proj2-desc" data-i18n="lbl_proj_desc">Descrição</label>
+                <textarea id="f-proj2-desc"></textarea>
+              </div>
+              <div class="f f--full">
+                <label for="f-proj2-link" data-i18n="lbl_proj_link">Link (URL)</label>
+                <input id="f-proj2-link" type="text" placeholder="https://github.com/..." />
+              </div>
+              <div class="f f--full">
+                <label for="f-proj2-tech" data-i18n="lbl_proj_tech">Tecnologias</label>
+                <input id="f-proj2-tech" type="text" placeholder="Python, FastAPI, Docker" />
+                <p class="help" data-i18n="help_proj_tech">Separe com vírgulas</p>
+              </div>
+              <div class="f f--full">
+                <label for="f-proj3-title" data-i18n="lbl_proj_title">Título do Projeto</label>
+                <input id="f-proj3-title" type="text" />
+              </div>
+              <div class="f f--full">
+                <label for="f-proj3-desc" data-i18n="lbl_proj_desc">Descrição</label>
+                <textarea id="f-proj3-desc"></textarea>
+              </div>
+              <div class="f f--full">
+                <label for="f-proj3-link" data-i18n="lbl_proj_link">Link (URL)</label>
+                <input id="f-proj3-link" type="text" placeholder="https://github.com/..." />
+              </div>
+              <div class="f f--full">
+                <label for="f-proj3-tech" data-i18n="lbl_proj_tech">Tecnologias</label>
+                <input id="f-proj3-tech" type="text" placeholder="Python, FastAPI, Docker" />
+                <p class="help" data-i18n="help_proj_tech">Separe com vírgulas</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -401,11 +473,11 @@ Suporte à Defesa: Construção de serviços e APIs (Flask/FastAPI) que dão sup
                     <span id="p-phone"></span>
                   </div>
                   <div class="cv-cr" id="linkedin-cr">
-                    <span class="cv-cr-label">LinkedIn</span>
+                    <span class="cv-cr-label" data-i18n="cv_linkedin">LinkedIn</span>
                     <a id="p-linkedin-a" href="https://linkedin.com/in/"><span id="p-linkedin"></span></a>
                   </div>
                   <div class="cv-cr" id="github-cr">
-                    <span class="cv-cr-label">GitHub</span>
+                    <span class="cv-cr-label" data-i18n="cv_github">GitHub</span>
                     <a id="p-github-a" href="https://github.com/"><span id="p-github"></span></a>
                   </div>
                   <div class="cv-cr" id="link1-cr">
@@ -488,7 +560,7 @@ Suporte à Defesa: Construção de serviços e APIs (Flask/FastAPI) que dão sup
                       <span class="cv-exp-title" id="p-c3-title"></span>
                       <span class="cv-exp-date" id="p-c3-date"></span>
                     </div>
-                    <p class="cv-exp-company" id="p-c3-company"></p>
+                    <p class="cv-exp-company"><strong id="p-c3-company"></strong></p>
                     <ul class="cv-exp-bullets" id="p-c3-bullets"></ul>
                   </div>
                 </section>
@@ -505,6 +577,34 @@ Suporte à Defesa: Construção de serviços e APIs (Flask/FastAPI) que dão sup
                 <section class="cv-sec" id="p-certs">
                   <h2 class="cv-sec-title" data-i18n="cv_certs">Certificações e Cursos</h2>
                   <ul class="cv-lang-list" id="p-certs-list"></ul>
+                </section>
+
+                <section class="cv-sec" id="p-proj">
+                  <h2 class="cv-sec-title" data-i18n="cv_projects">Projetos</h2>
+                  <div id="p-proj1" class="cv-proj">
+                    <div class="cv-proj-head">
+                      <span class="cv-proj-title" id="p-proj1-title"></span>
+                      <a class="cv-proj-link" id="p-proj1-link" href="" target="_blank"></a>
+                    </div>
+                    <p class="cv-proj-desc" id="p-proj1-desc"></p>
+                    <div class="cv-tags" id="p-proj1-tech"></div>
+                  </div>
+                  <div id="p-proj2" class="cv-proj">
+                    <div class="cv-proj-head">
+                      <span class="cv-proj-title" id="p-proj2-title"></span>
+                      <a class="cv-proj-link" id="p-proj2-link" href="" target="_blank"></a>
+                    </div>
+                    <p class="cv-proj-desc" id="p-proj2-desc"></p>
+                    <div class="cv-tags" id="p-proj2-tech"></div>
+                  </div>
+                  <div id="p-proj3" class="cv-proj">
+                    <div class="cv-proj-head">
+                      <span class="cv-proj-title" id="p-proj3-title"></span>
+                      <a class="cv-proj-link" id="p-proj3-link" href="" target="_blank"></a>
+                    </div>
+                    <p class="cv-proj-desc" id="p-proj3-desc"></p>
+                    <div class="cv-tags" id="p-proj3-tech"></div>
+                  </div>
                 </section>
               </main>
             </div>
